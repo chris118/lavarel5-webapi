@@ -15,15 +15,20 @@ use Illuminate\Http\Request;
 
 $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', function ($api) {
-    $api->group(['namespace' => 'App\Http\Controllers\Api\V1'], function ($api) {
-        $api->post('/users/{user_name}/register','AuthenticateController@register');
-        $api->post('/users/{user_name}/login','AuthenticateController@login');
-        $api->post('/users/{user_name}/auth','AuthenticateController@auth');
+    $api->group(['namespace' => 'App\Api\V1\Controllers'], function ($api) {
         
-        $api->version('v1',['middleware' => ['jwt.auth']], function($api) {
+        // 登录 注册 获取授权码
+//        $api->post('/users/{user_name}/register','AuthenticateController@register');
+//        $api->post('/users/{user_name}/login','AuthenticateController@login');
+//        $api->post('/users/{user_name}/auth','AuthenticateController@auth');
         
-            $api->get('/users/', 'UserController@index');
-        });
+        
+        $api->get('/categories/', 'CategoryController@index');
+//        $api->version('v1',['middleware' => ['jwt.auth']], function($api) {
+//        
+//            $api->get('/users/', 'UserController@index');
+//            $api->get('/imports/', 'ImportController@index');
+//        });
         
     });
 });
